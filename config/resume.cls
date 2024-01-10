@@ -4,11 +4,20 @@
 \usepackage{array}
 \usepackage{ifthen}
 
+\def\namesize{\Large}
+\def \addressSep {-}
+\def\addressskip{\par}
+\def\sectionlineskip{\medskip} 
+\def\nameskip{\smallskip} 
+\def\sectionskip{\medskip} 
+\def\topicskip{\smallskip}
+\def\expertiseskip{\smallskip}
+
 \def \name#1 {\def\@name{#1}}
 \def \@name {}
+
 \def \expertise#1 {\def\@expertise{#1}}
 \def \@expertise {}
-\def \addressSep {-}
 
 \let \@addressone \relax
 \let \@addresstwo \relax
@@ -32,7 +41,6 @@
 \let \@topictwo \relax
 \let \@topicthree \relax
 
-% \topic command can be used to set the first, second, and third topic (last 2 optional)
 \def\topic#1{
   \@ifundefined{@topicone}{
     \def\@topicone{#1}
@@ -43,55 +51,47 @@
       \@ifundefined{@topicthree}{
         \def\@topicthree{#1}
       }{
-        % You can optionally handle more than three topics or print a warning here.
       }
     }
   }
 }
 
 
-% \printtopic is used to print a topic line (given as input)
-\def\printtopic#1{
-  \begingroup
-    \centerline{#1}
-  \endgroup
-  \topicskip
-}
-
-% Missing print functions, assuming some formatting
+% Missing print functions
 \def\printname{\centerline{\namesize\bfseries \@name}\nameskip}
 \def\printaddress#1{\centerline{#1}\addressskip}
-\def\printexpertise{\centerline{\@expertise}\addressskip}
+
+\def\printexpertise{
+  \@ifundefined{@expertise}{}{
+    \ifx\@expertise\empty
+    \else
+      \centerline{\@expertise}
+      \expertiseskip
+    \fi
+  }
+}
+
+
+\def\printtopic{
+  \@ifundefined{@topicone}{}{\centerline{\@topicone}\topicskip}
+  \@ifundefined{@topictwo}{}{\centerline{\@topictwo}\topicskip}
+  \@ifundefined{@topicthree}{}{\centerline{\@topicthree}\topicskip}
+}
 
 \let\ori@document=\document
 \renewcommand{\document}{
   \ori@document  % Begin document
-  \printname      % Print the name specified with \name
-  \printexpertise % Print the expertise
-  \@ifundefined{@topicone}{}{ % Print the first topic if specified
-    \printtopic{\@topicone}}
-  \@ifundefined{@topictwo}{}{ % Print the second topic if specified
-    \printtopic{\@topictwo}}
-  \@ifundefined{@topicthree}{}{ % Print the third topic if specified
-    \printtopic{\@topicthree}}
-  \@ifundefined{@addressone}{}{ % Print the first address if specified
-    \printaddress{\@addressone}}
-  \@ifundefined{@addresstwo}{}{ % Print the second address if specified
-    \printaddress{\@addresstwo}}
-  \@ifundefined{@addressthree}{}{ % Print the third address if specified
-    \printaddress{\@addressthree}}
+  \printname     % Print the name specified with \name
+  \printexpertise % Print the expertise if defined
+  \printtopic    % Print the topics if defined
+  \@ifundefined{@addressone}{}{\printaddress{\@addressone}}
+  \@ifundefined{@addresstwo}{}{\printaddress{\@addresstwo}}
+  \@ifundefined{@addressthree}{}{\printaddress{\@addressthree}}
 }
 
-
-% ... (rest of the code is unchanged)
-
-
-% Whitespace after the topic lines
-\def\topicskip{\par}
-
-%----------------------------------------------------------------------------------------
+%-------------------------------------------------------------------------------
 %	SECTION FORMATTING
-%----------------------------------------------------------------------------------------
+%-------------------------------------------------------------------------------
 
 % Defines the rSection environment for the large sections within the CV
 \newenvironment{rSection}[1]{ % 1 input argument - section name
@@ -107,9 +107,9 @@
   \end{list}
 }
 
-%----------------------------------------------------------------------------------------
+%-------------------------------------------------------------------------------
 %	WORK EXPERIENCE FORMATTING
-%----------------------------------------------------------------------------------------
+%-------------------------------------------------------------------------------
 
 \newenvironment{rSubsection}[4]{ % 4 input arguments - post, year(s) institution, job title and location
  {\bf #1} \hfill {#2} % Bold post and date on the right
@@ -119,10 +119,3 @@
   }
 }
 
-% The below commands define the whitespace after certain things in the document - they can be \smallskip, \medskip or \bigskip
-\def\namesize{\Large} % Size of the name at the top of the document
-\def\addressskip{\par} % The space between the two address (or phone/email) lines
-\def\sectionlineskip{\medskip} % The space above the horizontal line for each section 
-\def\nameskip{\smallskip} % The space after your name at the top
-\def\sectionskip{\medskip} % The space after the heading section
-\def\topicskip{\smallskip} % The space after the topic
