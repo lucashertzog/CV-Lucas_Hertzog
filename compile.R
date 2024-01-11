@@ -1,34 +1,28 @@
 library(tinytex)
 lapply(list.files("R", full.names = TRUE), source)
 
-fixed <- c(
-  "begin",
-  "end",
-  "config"
+cv_section(
+  begin = FULL,
+  end = FULL,
+  config = FULL,
+  contact = FULL,
+  education = OMIT,
+  work_experience = OMIT,
+  grants_awards = SHORT,
+  un_consult = FULL,
+  skills = SHORT,
+  publications = FULL,
+  presentations = SHORT,
+  teaching = SHORT,
+  projects  = SHORT,
+  supervision = SHORT,
+  policy = SHORT,
+  admin = SHORT,
+  academic_community = SHORT,
+  capacity_building = SHORT,
+  media = SHORT,
+  skills = SHORT,
+  referees = SHORT
 )
 
-twopg <- c(
-  "contact",
-  "education",
-  "work_experience",
-  "grants_awards",
-  "un_consult",
-  "publications",
-  "presentations",
-  "skills",
-  "teaching",
-  "projects"
-)
-
-full_section(fixed, TRUE)
-full_section(twopg, FALSE)
-# full_section("supervision", F)
-# full_section("policy", F)
-# full_section("admin", F)
-# full_section("academic_community", F)
-# full_section("capacity_building", F)
-# full_section("media", F)
-# full_section("skills", F)
-# full_section("referees", F)
-
-compile_cv()
+cv_compile()
