@@ -5,15 +5,15 @@ cv_section(
   begin = FULL,
   end = FULL,
   config = FULL,
-  contact = FULL,
+  contact = SHORT,
   education = FULL,
   work_experience = FULL,
-  grants_awards = FULL,
+  grants_awards = SHORT,
   un_consult = FULL,
   skills = FULL,
-  publications = FULL,
-  presentations = FULL,
-  teaching = FULL,
+  publications = SHORT,
+  presentations = SHORT,
+  teaching = SHORT,
   projects  = FULL,
   supervision = FULL,
   policy = FULL,
@@ -21,8 +21,34 @@ cv_section(
   academic_community = FULL,
   capacity_building = FULL,
   media = FULL,
-  skills = FULL,
+  skills = SHORT,
   referees = FULL
 )
 
-cv_compile()
+section_order <- c(
+  "01.contact",
+  "00.begin",
+  "02.education",
+  "03.work_experience",
+  "17.un_consult",
+  "06.grants_awards",
+  "04.publications",
+  "05.presentations",
+  "07.teaching",
+  "08.supervision",
+  "09.projects",
+  "10.policy",
+  "11.admin",
+  "12.academic_community",
+  "13.capacity_building",
+  "14.media",
+  "15.skills",
+  "16.referees"
+)
+
+# pg_break <- c(
+#   "03.work_experience"
+# )
+
+
+cv_compile("cv/cv_hertzog.pdf")

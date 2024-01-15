@@ -4,7 +4,9 @@
 \usepackage{parskip}
 
 %links
-\usepackage{hyperref}
+%\usepackage{hyperref}
+\usepackage[colorlinks=true, linkcolor=blue, urlcolor=blue, citecolor=blue]{hyperref}
+
 \usepackage{xurl}
 
 \usepackage[super]{nth}
@@ -28,10 +30,15 @@
 \usepackage{setspace}
 
 % Bibliography, bibentry, apa style
-\usepackage{natbib}
-\usepackage{bibentry}
-\bibliographystyle{apalike}
-\nobibliography{HertzogLib}
+% \usepackage{natbib}
+% \usepackage{bibentry}
+% \bibliographystyle{apalike}
+%\nobibliography{HertzogLib}
+
+% BibLaTeX with Biber
+\usepackage[backend=biber, style=authoryear, citestyle=authoryear, doi=true, url=true, isbn=false, natbib=true]{biblatex}
+\addbibresource{HertzogLib.bib}
+
 
 % ORCID and academic icons
 \usepackage{academicons}

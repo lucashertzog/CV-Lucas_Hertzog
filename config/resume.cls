@@ -56,6 +56,9 @@
   }
 }
 
+\def \blurb#1 {\def\@blurb{#1}}
+\def \@blurb {}
+
 
 % Missing print functions
 \def\printname{\centerline{\namesize\bfseries \@name}\nameskip}
@@ -78,6 +81,23 @@
   \@ifundefined{@topicthree}{}{\centerline{\@topicthree}\topicskip}
 }
 
+\def\printblurb{
+  \@ifundefined{@blurb}{}{
+    \ifx\@blurb\empty
+    \else
+      \begin{center}
+        \parbox{\textwidth}{%
+          \centering
+          \@blurb
+        }
+      \end{center}
+      \medskip % Adjust spacing as needed
+    \fi
+  }
+}
+
+
+
 \let\ori@document=\document
 \renewcommand{\document}{
   \ori@document  % Begin document
@@ -87,6 +107,7 @@
   \@ifundefined{@addressone}{}{\printaddress{\@addressone}}
   \@ifundefined{@addresstwo}{}{\printaddress{\@addresstwo}}
   \@ifundefined{@addressthree}{}{\printaddress{\@addressthree}}
+  \printblurb    % Print the blurb
 }
 
 %-------------------------------------------------------------------------------

@@ -1,6 +1,8 @@
-cv_compile <- function() {
-  # Read the lines from cvtwo.tex
-  lines <- readLines("skeleton.tex")
+cv_compile <- function(
+    final_pdf_path = "cv/cv_hertzog.pdf"
+){
+  # Read the lines from 00.index.tex
+  lines <- readLines("sections/00.index.tex")
   
   # Create a temporary file for the new .tex document
   temp_file <- tempfile(fileext = ".tex")
@@ -8,29 +10,27 @@ cv_compile <- function() {
   # Open the temporary file for writing
   file_conn <- file(temp_file, "w")
   
-  # Iterate through each line in cvtwo.tex
-  for (line in lines) {
-    # Check if the line corresponds to a section
-    if (grepl("^\\\\input\\{sections", line)) {
-      # Extract the section name from the line
-      section_name <- gsub("^\\\\input\\{sections/[0-9]+\\.(.*)\\.tex\\}$", "\\1", line)
-      short_version <- grepl("_short", section_name)
-      
-      # Adjust section name for short versions
-      if (short_version) {
-        section_name <- gsub("_short", "", section_name)
-      }
-      
-      # Decide whether to include this line based on cv_section settings
-      if ((!short_version && get(section_name, envir = globalenv())) ||
-          (short_version && get(paste0(section_name, "_short"), envir = globalenv()))) {
-        writeLines(line, file_conn)
-      }
-    } else {
-      # Write non-section lines directly to the file
-      writeLines(line, file_conn)
+  # Explicitly include config.tex at the beginning
+  writeLines("\\input{config/config.tex}", file_conn)
+  
+  for (section in section_order) {
+    section_full <- paste0("sections/", section, ".tex")
+    section_short <- paste0("sections/", section, "_short.tex")
+    
+    # Strip the numeric prefix for condition check
+    variable_name <- gsub("^[0-9]+\\.", "", section)
+    
+    if (get(variable_name, envir = globalenv())) {
+      writeLines(paste0("\\input{", section_full, "}"), file_conn)
+    } else if (get(paste0(variable_name, "_short"), envir = globalenv())) {
+      writeLines(paste0("\\input{", section_short, "}"), file_conn)
+    }
+    if (section %in% pg_break) {
+      writeLines("\\newpage", file_conn)
     }
   }
+  
+  writeLines("\\end{document}", file_conn)
   
   # Close the file connection
   close(file_conn)
@@ -38,13 +38,23 @@ cv_compile <- function() {
   # Compile the LaTeX document
   latexmk(temp_file, engine = "xelatex")
   
-  final_pdf_path <- "cv/cv_hertzog.pdf"
   temp_pdf_path <- gsub("\\.tex$", ".pdf", temp_file)
   file.rename(temp_pdf_path, final_pdf_path)
+  
+  # Convert the relative path to an absolute path
+  final_pdf_absolute_path <- normalizePath(final_pdf_path, mustWork = FALSE)
   
   # Clean up log files
   log_files <- list.files(pattern = "\\.log$")
   if (length(log_files) > 0) {
     file.remove(log_files)
+  }
+  
+  # Open the PDF if on Windows
+  if (.Platform$OS.type == "windows") {
+    shell.exec(final_pdf_absolute_path)
+  } else {
+    # For macOS and Linux
+    system(paste("open", shQuote(final_pdf_absolute_path)))
   }
 }
