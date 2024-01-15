@@ -11,8 +11,8 @@ cv_section(
   grants_awards = SHORT,
   un_consult = FULL,
   skills = FULL,
-  publications = SHORT,
-  presentations = SHORT,
+  publications = FULL,
+  presentations = FULL,
   teaching = SHORT,
   projects  = FULL,
   supervision = FULL,
@@ -46,9 +46,9 @@ section_order <- c(
   "16.referees"
 )
 
-# pg_break <- c(
-#   "03.work_experience"
-# )
+pg_break <- c(
+  "03.work_experience"
+)
 
 
 cv_compile("cv/cv_hertzog.pdf")

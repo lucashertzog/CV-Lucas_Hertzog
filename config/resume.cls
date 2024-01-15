@@ -1,11 +1,7 @@
 \LoadClass[11pt,a4paper]{article}
 
-\usepackage[parfill]{parskip}
-\usepackage{array}
-\usepackage{ifthen}
-
-\def\namesize{\Large}
-\def \addressSep {-}
+\def\namesize{\huge}
+\def\addressSep {-}
 \def\addressskip{\par}
 \def\sectionlineskip{\medskip} 
 \def\nameskip{\smallskip} 
@@ -59,7 +55,6 @@
 \def \blurb#1 {\def\@blurb{#1}}
 \def \@blurb {}
 
-
 % Missing print functions
 \def\printname{\centerline{\namesize\bfseries \@name}\nameskip}
 \def\printaddress#1{\centerline{#1}\addressskip}
@@ -97,7 +92,6 @@
 }
 
 
-
 \let\ori@document=\document
 \renewcommand{\document}{
   \ori@document  % Begin document
@@ -114,19 +108,44 @@
 %	SECTION FORMATTING
 %-------------------------------------------------------------------------------
 
-% Defines the rSection environment for the large sections within the CV
-\newenvironment{rSection}[1]{ % 1 input argument - section name
-  \sectionskip
-  \MakeUppercase {\bf #1} % Section title
-    \sectionlineskip
-\hrule % Horizontal line
-  \begin{list}{}{ % List for each individual item in the section
-    \setlength{\leftmargin}{0.5em} % Margin within the section
-  }
-  \item[]
-}{
-  \end{list}
+% % Defines the rSection environment for the large sections within the CV
+% \newenvironment{rSection}[1]{ % 1 input argument - section name
+%   \sectionskip
+%   \MakeUppercase {\bf #1} % Section title
+%     \sectionlineskip
+% \hrule % Horizontal line
+%   \begin{list}{}{ % List for each individual item in the section
+%     \setlength{\leftmargin}{0.5em} % Margin within the section
+%   }
+%   \item[]
+% }{
+%   \end{list}
+% }
+
+% Command to output section title headings
+\newcommand{\cvsect}[1]{% The only parameter is the section text
+    \vspace{\baselineskip} % Whitespace before the section title
+    {\large \textcolor{MidnightBlue}{\textbf{#1}}} \hspace{4pt} \Vhrulefill % Section title
+    \newline % Starts a new line after the title and horizontal rule
 }
+
+% Define \Vhrulefill if not already defined
+\newcommand{\Vhrulefill}{%
+    \leavevmode\textcolor{MidnightBlue}{\leaders\hrule height 2.4pt depth -2pt \hfill \kern 0pt}%
+}
+
+% Redefines the rSection environment for the large sections within the CV
+\newenvironment{rSection}[1]{ % 1 input argument - section name
+    \cvsect{#1} % Use the cvsect command for the section title
+    % Start of the list for each individual item in the section
+    \begin{list}{}{ 
+        \setlength{\leftmargin}{0.5em} % Margin within the section
+    }
+    \item[]
+}{
+    \end{list} % End of the list
+}
+
 
 %-------------------------------------------------------------------------------
 %	WORK EXPERIENCE FORMATTING
