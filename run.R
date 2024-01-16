@@ -16,7 +16,7 @@ cv_section(
   teaching = SHORT,
   projects  = FULL,
   supervision = FULL,
-  policy = FULL,
+  policy = OMIT,
   admin = FULL,
   academic_community = FULL,
   capacity_building = FULL,
@@ -47,7 +47,9 @@ section_order <- c(
 )
 
 pg_break <- c(
-  "03.work_experience"
+  "03.work_experience",
+  "08.supervision",
+  "09.projects"
 )
 
 

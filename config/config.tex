@@ -1,66 +1,48 @@
 \documentclass{config/resume} % Use the custom resume.cls style
 
-\usepackage{worldflags}
+% packages
+\usepackage{worldflags} % Adds support for rendering country flags
+\usepackage[parfill]{parskip} % Adjusts paragraph spacing
+\usepackage{array} % Enhanced support for tabular environments
+\usepackage{ifthen} % Provides if-then-else logic for conditional statements
+\usepackage{fontawesome5} % Adds FontAwesome icons
+\usepackage{academicons} % Adds icons for academic platforms
+\usepackage[super]{nth} % Provides superscript for ordinal numbers (1st, 2nd, etc.)
+\usepackage[left=2cm,top=2cm,right=2cm,bottom=2cm]{geometry} % Sets margins
+\usepackage{parskip} % Adjusts paragraph spacing
+\usepackage[colorlinks=true, linkcolor=blue, urlcolor=blue, citecolor=blue]{hyperref} % 
+\usepackage{xurl} % Allows for line breaks within URLs
+\usepackage{multicol} % Support for multi-column layouts
+\usepackage{etaremune} % Provides reverse-numbered lists
+\usepackage{enumitem} % Customizes list formats
+\usepackage{tabularx} % Enhanced table features with adjustable-width columns
+\usepackage{array} % Enhanced support for tabular environments (duplicated)
+\usepackage{latexsym} % Adds LaTeX symbols
+\usepackage{fancyhdr} % Customizes headers and footers
+\usepackage[lastpage,user]{zref} % Cross-referencing features
+\usepackage[yyyymmdd]{datetime} % Customizes the date format
+\usepackage{fontspec} % Allows specification of fonts
+\usepackage[dvipsnames]{xcolor} % Extended color support
+\usepackage{setspace} % Customizes line spacing
+\usepackage{natbib} % Bibliography and citation support
+\usepackage{bibentry} % Full bibliography entries in the body of the text
 
-\usepackage[parfill]{parskip}
-\usepackage{array}
-\usepackage{ifthen}
+% colours
+\definecolor{mydoi}{RGB}{252, 180, 37} % Custom DOI color
+\definecolor{myblue}{RGB}{0, 176, 240} % Custom blue color
+\definecolor{curtin}{RGB}{204, 153, 0} % Custom color, named 'curtin'
+\definecolor{orcidlogocol}{HTML}{A6CE39} % Custom color for ORCID logo
+\definecolor{lincol}{RGB}{0, 119, 181}  % Custom LinkedIn color
+\definecolor{gcol}{HTML}{4285F4} % Custom Google color
+\definecolor{gitcol}{RGB}{0, 0, 0} % Custom GitHub color
 
-\usepackage[left=2cm,top=2cm,right=2cm,bottom=2cm]{geometry} % Document margins
-\usepackage{parskip}
+% Bibliography
+\bibliographystyle{apalike} % APA-like bibliography style
+\nobibliography{HertzogLib} % Links the bibliography file
 
-%links
-%\usepackage{hyperref}
-\usepackage[colorlinks=true, linkcolor=blue, urlcolor=blue, citecolor=blue]{hyperref}
+\linespread{0.95833} % Sets line spacing
 
-\usepackage{xurl}
-
-\usepackage[super]{nth}
-
-%multi columns
-\usepackage{multicol}
-
-% numbers
-\usepackage{etaremune}
-\usepackage{enumitem}
-
-\usepackage{tabularx}
-\usepackage{array}
-\usepackage{latexsym}
-\usepackage{fancyhdr}
-\usepackage[lastpage,user]{zref}
-\usepackage[yyyymmdd]{datetime}
-\usepackage{fontspec}
-\usepackage[dvipsnames]{xcolor}
-
-\usepackage{setspace}
-
-% Bibliography, bibentry, apa style
-\usepackage{natbib}
-\usepackage{bibentry}
-\bibliographystyle{apalike}
-\nobibliography{HertzogLib}
-
-% ORCID and academic icons
-\usepackage{academicons}
-\definecolor{orcidlogocol}{HTML}{A6CE39}
-\definecolor{lincol}{RGB}{0, 119, 181}  % Blue color for LinkedIn
-\definecolor{gcol}{HTML}{4285F4}
-\definecolor{gitcol}{RGB}{0, 0, 0}
-
-%other icons
-\usepackage{fontawesome5}
-
-%doi colour and others
-\definecolor{mydoi}{RGB}{252, 180, 37}
-\definecolor{myblue}{RGB}{0, 176, 240}
-\definecolor{curtin}{RGB}{204, 153, 0}
-
-\linespread{0.95833}
-
-
-
-%In case I wanna change the font
+% Change the font - need to have .ttf in the folder
 %\setmainfont[Ligatures=TeX,Scale=0.95]{Poppins-Light.ttf}[
 %BoldFont= Poppins-Medium.ttf ,
 %ItalicFont     = Poppins-LightItalic.ttf ,
