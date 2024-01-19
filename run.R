@@ -13,6 +13,7 @@ cv_section(
   skills = FULL,
   publications = FULL,
   presentations = FULL,
+  software = FULL,
   teaching = SHORT,
   projects  = FULL,
   supervision = FULL,
@@ -34,12 +35,13 @@ section_order <- c(
   "06.grants_awards",
   "04.publications",
   "05.presentations",
+  "18.software",
+  "12.academic_community",
   "07.teaching",
   "08.supervision",
-  "09.projects",
   "10.policy",
   "11.admin",
-  "12.academic_community",
+  "09.projects",
   "13.capacity_building",
   "14.media",
   "15.skills",
@@ -48,7 +50,7 @@ section_order <- c(
 
 pg_break <- c(
   "03.work_experience",
-  "08.supervision",
+  "11.admin",
   "09.projects"
 )
 
