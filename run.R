@@ -1,3 +1,7 @@
+# tinytex::reinstall_tinytex()
+# tinytex::tlmgr_update(self = TRUE)
+# tinytex::tlmgr_install("expl3")
+
 library(tinytex)
 lapply(list.files("R", full.names = TRUE), source)
 
@@ -54,5 +58,6 @@ pg_break <- c(
   "09.projects"
 )
 
+cv_compile("G:/My Drive/Job_Applications/2024 UNICEF ECW/Hertzog_cv.pdf")
 
-cv_compile("cv/cv_hertzog.pdf")
+cover_compile("G:/My Drive/Job_Applications/2024 UNICEF ECW/Hertzog_cover.pdf")

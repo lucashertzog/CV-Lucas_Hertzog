@@ -1,8 +1,16 @@
-cv_compile <- function(
-    final_pdf_path = "outdir/cv_hertzog.pdf"
+cover_compile <- function(
+    final_pdf_path = "outdir/cover_hertzog.pdf"
 ){
-  # Read the lines from 00.index.tex
-  lines <- readLines("cv/00.index.tex")
+  # Convert DOCX to TEX
+  docx_file <- "cover/cover.docx"
+  tex_file <- gsub("\\.docx$", ".tex", docx_file)
+  system(paste("pandoc", docx_file, "-s -o", tex_file))
+  
+  # Read and process the converted TEX file
+  tex <- "cover/cover.tex"
+  lines <- readLines(tex)
+  start_index <- grep("^Dear", lines)
+  processed_lines <- lines[start_index:length(lines)]
   
   # Create a temporary file for the new .tex document
   temp_file <- tempfile(fileext = ".tex")
@@ -11,26 +19,10 @@ cv_compile <- function(
   file_conn <- file(temp_file, "w")
   
   # Explicitly include config.tex at the beginning
-  writeLines("\\input{config/config.tex}", file_conn)
-  
-  for (section in section_order) {
-    section_full <- paste0("cv/", section, ".tex")
-    section_short <- paste0("cv/", section, "_short.tex")
-    
-    # Strip the numeric prefix for condition check
-    variable_name <- gsub("^[0-9]+\\.", "", section)
-    
-    if (get(variable_name, envir = globalenv())) {
-      writeLines(paste0("\\input{", section_full, "}"), file_conn)
-    } else if (get(paste0(variable_name, "_short"), envir = globalenv())) {
-      writeLines(paste0("\\input{", section_short, "}"), file_conn)
-    }
-    if (section %in% pg_break) {
-      writeLines("\\newpage", file_conn)
-    }
-  }
-  
-  writeLines("\\end{document}", file_conn)
+  writeLines("\\input{config/config_cover.tex}", file_conn)
+  writeLines("\\input{cover/01.begin_cover.tex}", file_conn)
+  writeLines("\\input{cover/02.header_cover.tex}", file_conn)
+  writeLines(processed_lines, file_conn)
   
   # Close the file connection
   close(file_conn)
