@@ -4,6 +4,9 @@
 .Ruserdata
 *.tex
 !config.tex
+!config_cover.tex
 *.bib
 *.pdf
+*.png
+*.docx
 
