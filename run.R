@@ -11,7 +11,7 @@ cv_section(
   config = FULL,
   contact = SHORT,
   education = FULL,
-  work_experience = FULL,
+  work_experience = SHORT,
   grants_awards = SHORT,
   un_consult = FULL,
   skills = FULL,
@@ -53,11 +53,12 @@ section_order <- c(
 )
 
 pg_break <- c(
-  "03.work_experience",
+  "17.un_consult",
   "11.admin",
+  "07.teaching",
   "09.projects"
 )
 
-cv_compile("G:/My Drive/Job_Applications/2024 UNICEF ECW/Hertzog_cv.pdf")
+cv_compile("outdir/cv_hertzog.pdf")
 
-cover_compile("G:/My Drive/Job_Applications/2024 UNICEF ECW/Hertzog_cover.pdf")
+cover_compile("outdir/cover_hertzog.pdf")
