@@ -56,7 +56,12 @@
 \def \@blurb {}
 
 % Missing print functions
-\def\printname{\centerline{\namesize\bfseries \@name}\nameskip}
+% \def\printname{\centerline{\namesize\bfseries \@name}\nameskip}
+
+\def\printname{
+  \noindent\hspace{0.75in}{\namesize\bfseries \@name}\nameskip
+}
+
 \def\printaddress#1{\centerline{#1}\addressskip}
 
 \def\printexpertise{
@@ -122,40 +127,46 @@
 %   \end{list}
 % }
 
+% Define \Vhrulefill
+% \newcommand{\Vhrulefill}{%
+%     \leavevmode\textcolor{MidnightBlue}{\leaders\hrule height 2.4pt depth -2pt \hfill \kern 0pt}%
+% }
+
 % Command to output section title headings
 \newcommand{\cvsect}[1]{% The only parameter is the section text
     \vspace{\baselineskip} % Whitespace before the section title
-    {\large \textcolor{MidnightBlue}{\textbf{#1}}} \hspace{4pt} \Vhrulefill % Section title
-    \newline % Starts a new line after the title and horizontal rule
-}
-
-% Define \Vhrulefill if not already defined
-\newcommand{\Vhrulefill}{%
-    \leavevmode\textcolor{MidnightBlue}{\leaders\hrule height 2.4pt depth -2pt \hfill \kern 0pt}%
+    \hspace{-0.3in}% Move to the left into the margin
+    \begin{minipage}{0.9in}
+    \hyphenpenalty=10000
+    \sloppy
+    {\barlow\textcolor{CustomRed}{\textbf{#1}}} % Section title
+    \end{minipage}
+    % \Vhrulefill % Section title
+    %\newline % Starts a new line after the title and horizontal rule
 }
 
 % Redefines the rSection environment for the large sections within the CV
 \newenvironment{rSection}[1]{ % 1 input argument - section name
     \cvsect{#1} % Use the cvsect command for the section title
+    \vspace{-0.275in}
     % Start of the list for each individual item in the section
-    \begin{list}{}{ 
-        \setlength{\leftmargin}{0.5em} % Margin within the section
+    \begin{list}{}{
+        \setlength{\leftmargin}{0.75in} % Margin within the section
     }
     \item[]
 }{
     \end{list} % End of the list
 }
 
-
 %-------------------------------------------------------------------------------
 %	WORK EXPERIENCE FORMATTING
 %-------------------------------------------------------------------------------
 
 \newenvironment{rSubsection}[4]{ % 4 input arguments - post, year(s) institution, job title and location
- {\bf #1} \hfill {#2} % Bold post and date on the right
- \ifthenelse{\equal{#3}{}}{}{ % If the third argument is not specified, don't print the job title and location line
+ {#1} \hfill {#2} % Bold post and date on the right
+ \ifthenelse{\equal{\textit{#3}}{}}{}{ % If the third argument is not specified, don't print the job title and location line
   \\
-  {#3} \hfill { #4} % Italic job title and location
+  {\textit{#3}} \hfill { #4} % Italic job title and location
   }
 }
 

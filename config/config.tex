@@ -8,7 +8,7 @@
 \usepackage{fontawesome5} % Adds FontAwesome icons
 \usepackage{academicons} % Adds icons for academic platforms
 \usepackage[super]{nth} % Provides superscript for ordinal numbers (1st, 2nd, etc.)
-\usepackage[left=2cm,top=2cm,right=2cm,bottom=2cm]{geometry} % Sets margins
+\usepackage[left=1in,top=1in,right=1.25in,bottom=1in]{geometry} % Sets margins
 \usepackage{parskip} % Adjusts paragraph spacing
 \usepackage[colorlinks=true, linkcolor=blue, urlcolor=blue, citecolor=blue]{hyperref} % 
 \usepackage{xurl} % Allows for line breaks within URLs
@@ -34,6 +34,7 @@
 \definecolor{lincol}{RGB}{0, 119, 181}  % Custom LinkedIn color
 \definecolor{gcol}{HTML}{4285F4} % Custom Google color
 \definecolor{gitcol}{RGB}{0, 0, 0} % Custom GitHub color
+\definecolor{CustomRed}{HTML}{AA0000}
 
 % Bibliography
 \bibliographystyle{apalike} % APA-like bibliography style
@@ -41,8 +42,21 @@
 
 \linespread{0.95833} % Sets line spacing
 
+% personal info
+\newcommand{\myorcid}{https://orcid.org/0000-0001-9881-3648}
+\newcommand{\mygithub}{https://github.com/lucashertzog}
+\newcommand{\mylinkedin}{https://www.linkedin.com/in/lucashertzog/}
+\newcommand{\mygooglescholar}{https://scholar.google.com/citations?user=I-neNC0AAAAJ&hl=en}
+\newcommand{\myaddress}{https://www.curtin.edu.au/about/learning-teaching/health-sciences/curtin-school-of-population-health/}
+\newcommand{\myemail}{lucas.hertzog@curtin.edu.au}
+
 % Change the font - need to have .ttf in the folder
-% \setmainfont[Ligatures=TeX,Scale=0.95]{Poppins-Light.ttf}[
-% BoldFont= Poppins-Medium.ttf ,
-% ItalicFont     = Poppins-LightItalic.ttf ,
-% BoldItalicFont = Poppins-BoldItalic.ttf ]
+\setmainfont[Ligatures=TeX, Scale=1,
+    Path=./fonts/, % Specify the path to your fonts directory
+    BoldFont=MinionPro-Bold.otf,
+    ItalicFont=MinionPro-It.otf,
+    BoldItalicFont=MinionPro-Semibold.otf
+]{MinionPro-Regular.otf}
+
+\newfontfamily{\barlow}{BarlowCondensed-SemiBold}[Path=./fonts/, Extension=.ttf, , Scale=0.9]
+
