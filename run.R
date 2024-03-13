@@ -7,7 +7,6 @@ lapply(list.files("R", full.names = TRUE), source)
 
 cv_section(
   begin = FULL,
-  end = FULL,
   config = FULL,
   contact = SHORT,
   education = SHORT,
@@ -35,6 +34,7 @@ cv_section(
   referees = FULL
 )
 
+
 section_order <- c(
   "01.contact",
   "00.begin",
@@ -55,18 +55,19 @@ section_order <- c(
   "07.teaching",
   "08.supervision",
   "09.projects",
-  "11.admin",
   "12.academic_community",
+  "11.admin",
   "10.policy",
   "13.capacity_building",
   "16.referees"
 )
 
-pg_break <- c("15.skills",
-              "08.supervision",
-              "09.projects"
+pg_break <- c(
+  "08.supervision"
+  # ,
+  # "12.academic_community"
 )
 
-cv_compile("outdir/cv_hertzog.pdf")
+cv_compile("outdir/hertzog_cv.pdf")
 
-cover_compile("outdir/cover_hertzog.pdf")
+cover_compile("outdir/hertzog_cover.pdf")

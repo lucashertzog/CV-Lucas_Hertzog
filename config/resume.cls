@@ -1,4 +1,4 @@
-\LoadClass[11pt,a4paper]{article}
+\LoadClass[12pt,a4paper]{article}
 
 \def\namesize{\huge}
 \def\addressSep {-}

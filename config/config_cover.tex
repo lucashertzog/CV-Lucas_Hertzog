@@ -2,28 +2,19 @@
 
 \usepackage[colorlinks=true, linkcolor=blue, urlcolor=blue, citecolor=blue]{hyperref}
 \usepackage[parfill]{parskip} % Adjusts paragraph spacing
-%\usepackage{fontawesome5} % Adds FontAwesome icons
-\usepackage{array} % Enhanced support for tabular environments and additional features for table columns
-\usepackage[left=1in,top=1in,right=1in,bottom=1in]{geometry} % Customizes the page layout
 \usepackage{graphicx} % Provides support for including graphics in the document
-\usepackage{setspace} % Allows for setting line spacing in the document, such as single or double spacing
-\usepackage{fmtcount} % Provides commands for displaying the value of a LaTeX counter
-\usepackage{multicol} % Enables the use of multiple columns in the document layout
-\usepackage{ragged2e} % Provides improved commands for left-aligned (ragged right) text
-\usepackage{setspace} % Allows for setting line spacing in the document, such as single or double spacing
-\usepackage{fontspec}
+\usepackage[left=1.1in,top=1in,right=1.1in,bottom=1in]{geometry} % Customizes the page layout
+\usepackage{setspace} % Allows for setting line spacing in the document
+\usepackage{fontspec} % Allows specifying fonts
 \usepackage{fancyhdr} % Customizes headers and footers
 \usepackage{xcolor} % Extended color support
+\usepackage{fontawesome5} % Adds FontAwesome icons
 
-\linespread{1.2}
+\linespread{1.2} % Adjust line spacing for the document
 
-\graphicspath{ {images/}} %upload your signature to this file
+\graphicspath{ {images/}} % Set the path to your images directory
 
-\def \addressSep {$\diamond$} % Set default address separator to a diamond
-
-\definecolor{gitcol}{RGB}{0, 0, 0} % Custom GitHub color
-
-\newcommand{\myemail}{lucas.hertzog@curtin.edu.au}
+\definecolor{gitcol}{RGB}{0, 0, 0} % Define custom color
 
 \setmainfont[Ligatures=TeX, Scale=1,
     Path=./fonts/, % Specify the path to your fonts directory
@@ -32,4 +23,46 @@
     BoldItalicFont=MinionPro-Semibold.otf
 ]{MinionPro-Regular.otf}
 
-\newfontfamily{\barlow}{BarlowCondensed-SemiBold}[Path=./fonts/, Extension=.ttf, , Scale=0.9]
+\newfontfamily{\barlow}{BarlowCondensed-SemiBold}[Path=./fonts/, Extension=.ttf, Scale=0.9]
+
+\newcommand{\myemail}{lucas.hertzog@curtin.edu.au}
+
+\fancyhf{} % Clear all header and footer fields
+\renewcommand{\headrulewidth}{0pt} % Remove the header line
+
+
+% \documentclass[a4paper,11pt]{article}
+% 
+% \usepackage[colorlinks=true, linkcolor=blue, urlcolor=blue, citecolor=blue]{hyperref}
+% \usepackage[parfill]{parskip} % Adjusts paragraph spacing
+% %\usepackage{fontawesome5} % Adds FontAwesome icons
+% \usepackage{array} % Enhanced support for tabular environments and additional features for table columns
+% \usepackage[left=1in,top=1in,right=1in,bottom=1in]{geometry} % Customizes the page layout
+% \usepackage{graphicx} % Provides support for including graphics in the document
+% \usepackage{setspace} % Allows for setting line spacing in the document, such as single or double spacing
+% \usepackage{fmtcount} % Provides commands for displaying the value of a LaTeX counter
+% \usepackage{multicol} % Enables the use of multiple columns in the document layout
+% \usepackage{ragged2e} % Provides improved commands for left-aligned (ragged right) text
+% \usepackage{setspace} % Allows for setting line spacing in the document, such as single or double spacing
+% \usepackage{fontspec}
+% \usepackage{fancyhdr} % Customizes headers and footers
+% \usepackage{xcolor} % Extended color support
+% 
+% \linespread{1.2}
+% 
+% \graphicspath{ {images/}} %upload your signature to this file
+% 
+% \def \addressSep {$\diamond$} % Set default address separator to a diamond
+% 
+% \definecolor{gitcol}{RGB}{0, 0, 0} % Custom GitHub color
+% 
+% \newcommand{\myemail}{lucas.hertzog@curtin.edu.au}
+% 
+% \setmainfont[Ligatures=TeX, Scale=1,
+%     Path=./fonts/, % Specify the path to your fonts directory
+%     BoldFont=MinionPro-Bold.otf,
+%     ItalicFont=MinionPro-It.otf,
+%     BoldItalicFont=MinionPro-Semibold.otf
+% ]{MinionPro-Regular.otf}
+% 
+% \newfontfamily{\barlow}{BarlowCondensed-SemiBold}[Path=./fonts/, Extension=.ttf, , Scale=0.9]
