@@ -1,14 +1,13 @@
 \documentclass{config/resume} % Use the custom resume.cls style
 
 % packages
-\usepackage{worldflags} % Adds support for rendering country flags
 \usepackage[parfill]{parskip} % Adjusts paragraph spacing
 \usepackage{array} % Enhanced support for tabular environments
 \usepackage{ifthen} % Provides if-then-else logic for conditional statements
 \usepackage{fontawesome5} % Adds FontAwesome icons
 \usepackage{academicons} % Adds icons for academic platforms
 \usepackage[super]{nth} % Provides superscript for ordinal numbers (1st, 2nd, etc.)
-\usepackage[left=1in,top=1in,right=1.25in,bottom=1in]{geometry} % Sets margins
+\usepackage[left=0.75in,top=0.75in,right=0.75in,bottom=0.75in]{geometry} % Sets margins
 \usepackage{parskip} % Adjusts paragraph spacing
 \usepackage[colorlinks=true, linkcolor=blue, urlcolor=blue, citecolor=blue]{hyperref} % 
 \usepackage{xurl} % Allows for line breaks within URLs
@@ -34,7 +33,10 @@
 \definecolor{lincol}{RGB}{0, 119, 181}  % Custom LinkedIn color
 \definecolor{gcol}{HTML}{4285F4} % Custom Google color
 \definecolor{gitcol}{RGB}{0, 0, 0} % Custom GitHub color
-\definecolor{CustomRed}{HTML}{AA0000}
+% \definecolor{CustomRed}{HTML}{AA0000} % dark red
+% \definecolor{CustomRed}{RGB}{0, 111, 60} % green
+\definecolor{CustomRed}{RGB}{0, 0, 0}
+% \definecolor{pink}{RGB}{134, 14, 113}
 
 % Bibliography
 \bibliographystyle{apalike} % APA-like bibliography style
@@ -60,3 +62,7 @@
 ]{MinionPro-Regular.otf}
 
 \newfontfamily{\barlow}{BarlowCondensed-SemiBold}[Path=./fonts/, Extension=.ttf, , Scale=0.9]
+
+\hypersetup{
+    pdfstartview={XYZ null null 1.25} % Set zoom to 125%
+}

@@ -1,6 +1,6 @@
-\LoadClass[12pt,a4paper]{article}
+\LoadClass[10pt,a4paper]{article}
 
-\def\namesize{\huge}
+\def\namesize{\LARGE}
 \def\addressSep {-}
 \def\addressskip{\par}
 \def\sectionlineskip{\medskip} 
@@ -9,7 +9,8 @@
 \def\topicskip{\smallskip}
 \def\expertiseskip{\smallskip}
 
-\def \name#1 {\def\@name{#1}}
+% \def \name#1 {\def\@name{#1}}
+\def \name#1 {\def\@name{\textcolor{CustomRed}{#1}}}
 \def \@name {}
 
 \def \expertise#1 {\def\@expertise{#1}}
@@ -59,7 +60,7 @@
 % \def\printname{\centerline{\namesize\bfseries \@name}\nameskip}
 
 \def\printname{
-  \noindent\hspace{0.75in}{\namesize\bfseries \@name}\nameskip
+  \noindent\hspace{0in}{\namesize\bfseries \@name}\nameskip
 }
 
 \def\printaddress#1{\centerline{#1}\addressskip}
@@ -73,7 +74,6 @@
     \fi
   }
 }
-
 
 \def\printtopic{
   \@ifundefined{@topicone}{}{\centerline{\@topicone}\topicskip}
@@ -114,59 +114,65 @@
 %-------------------------------------------------------------------------------
 
 % % Defines the rSection environment for the large sections within the CV
-% \newenvironment{rSection}[1]{ % 1 input argument - section name
-%   \sectionskip
-%   \MakeUppercase {\bf #1} % Section title
-%     \sectionlineskip
-% \hrule % Horizontal line
-%   \begin{list}{}{ % List for each individual item in the section
-%     \setlength{\leftmargin}{0.5em} % Margin within the section
-%   }
-%   \item[]
-% }{
-%   \end{list}
-% }
+\newenvironment{rSection}[1]{ % 1 input argument - section name
+  \pdfbookmark[1]{#1}{#1} % Automatically creates a bookmark
+  \sectionskip
+  \MakeUppercase {\bf #1} % Section title
+    \sectionlineskip
+\hrule % Horizontal line
+  \begin{list}{}{ % List for each individual item in the section
+    \setlength{\leftmargin}{0.5em} % Margin within the section
+  }
+  \item[]
+}{
+  \end{list}
+}
 
 % Define \Vhrulefill
-% \newcommand{\Vhrulefill}{%
-%     \leavevmode\textcolor{MidnightBlue}{\leaders\hrule height 2.4pt depth -2pt \hfill \kern 0pt}%
+\newcommand{\Vhrulefill}{%
+    \leavevmode{\leaders\hrule height 2.4pt depth -2pt \hfill \kern 0pt}%
+}
+
+%-------------------------------------------------------------------------------
+%	SUBSECTIONS FORMATTING
+%-------------------------------------------------------------------------------
+\newenvironment{rSubsection}[4]{ % 4 input arguments - post, year(s), institution, job title, and location
+    {#1}\hfill {#2} % post and date on the right
+    \ifthenelse{\equal{#3}{}}{}{ % If the third argument is not specified, don't print the job title and location line
+        \\
+        \textit{#3} \hfill {#4} % Italic job title and location
+    }
+}{} 
+
+%-------------------------------------------------------------------------------
+% OLDER ENVIRONMENT WITHOUT THE LINE AND USING LEFT HAND SIDE SECTION TITLES
+%-------------------------------------------------------------------------------
+% Command to output section title headings
+% \newcommand{\cvsect}[1]{% The only parameter is the section text
+%     \vspace{\baselineskip} % Whitespace before the section title
+%     \hspace{-0.5in}% Move to the left into the margin
+%     \begin{minipage}{1in}
+%     \hyphenpenalty=10000
+%     \sloppy
+%     {\barlow\textcolor{CustomRed}{\textbf{#1}}} % Section title
+%     \end{minipage}
+%     \vspace{-0.280in} % Adjust space between section title and content
+%     % \Vhrulefill % Section title
+%     %\newline % Starts a new line after the title and horizontal rule
 % }
 
-% Command to output section title headings
-\newcommand{\cvsect}[1]{% The only parameter is the section text
-    \vspace{\baselineskip} % Whitespace before the section title
-    \hspace{-0.3in}% Move to the left into the margin
-    \begin{minipage}{0.9in}
-    \hyphenpenalty=10000
-    \sloppy
-    {\barlow\textcolor{CustomRed}{\textbf{#1}}} % Section title
-    \end{minipage}
-    % \Vhrulefill % Section title
-    %\newline % Starts a new line after the title and horizontal rule
-}
-
 % Redefines the rSection environment for the large sections within the CV
-\newenvironment{rSection}[1]{ % 1 input argument - section name
-    \cvsect{#1} % Use the cvsect command for the section title
-    \vspace{-0.275in}
-    % Start of the list for each individual item in the section
-    \begin{list}{}{
-        \setlength{\leftmargin}{0.75in} % Margin within the section
-    }
-    \item[]
-}{
-    \end{list} % End of the list
-}
+% \newenvironment{rSection}[1]{ % 1 input argument - section name
+%     \cvsect{#1} % Use the cvsect command for the section title
+%     %\vspace{-0.275in}
+%     %\vspace{0in}
+%     % Start of the list for each individual item in the section
+%     \begin{list}{}{
+%         \setlength{\leftmargin}{0.5in} % Margin within the section
+%     }
+%     \item[]
+% }{
+%     \end{list} % End of the list
+% }
 
-%-------------------------------------------------------------------------------
-%	WORK EXPERIENCE FORMATTING
-%-------------------------------------------------------------------------------
-
-\newenvironment{rSubsection}[4]{ % 4 input arguments - post, year(s) institution, job title and location
- {#1} \hfill {#2} % Bold post and date on the right
- \ifthenelse{\equal{\textit{#3}}{}}{}{ % If the third argument is not specified, don't print the job title and location line
-  \\
-  {\textit{#3}} \hfill { #4} % Italic job title and location
-  }
-}
 
