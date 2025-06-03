@@ -1,23 +1,16 @@
 cv_compile <- function(
     final_pdf_path = "outdir/cv_hertzog.pdf"
-){
-  # Read the lines from 00.index.tex
-  lines <- readLines("cv/00.index.tex")
-  
-  # Create a temporary file for the new .tex document
+) {
+  # Create temporary structured .tex file
   temp_file <- tempfile(fileext = ".tex")
-  
-  # Open the temporary file for writing
   file_conn <- file(temp_file, "w")
   
-  # Explicitly include config.tex at the beginning
+  # Write structure
   writeLines("\\input{config/config.tex}", file_conn)
   
   for (section in section_order) {
     section_full <- paste0("cv/", section, ".tex")
     section_short <- paste0("cv/", section, "_short.tex")
-    
-    # Strip the numeric prefix for condition check
     variable_name <- gsub("^[0-9]+\\.", "", section)
     
     if (get(variable_name, envir = globalenv())) {
@@ -31,30 +24,34 @@ cv_compile <- function(
   }
   
   writeLines("\\end{document}", file_conn)
-  
-  # Close the file connection
   close(file_conn)
   
-  # Compile the LaTeX document
-  latexmk(temp_file, engine = "xelatex")
+  # Flatten into main_cv.tex
+  main_file <- "outdir/main_cv.tex"
+  script_path <- file.path(tinytex::tinytex_root(), "texmf-dist", "scripts", "latexpand", "latexpand")
+  cmd <- sprintf('perl "%s" %s', script_path, temp_file)
+  flattened <- system(cmd, intern = TRUE)
+  writeLines(flattened, main_file)
   
-  temp_pdf_path <- gsub("\\.tex$", ".pdf", temp_file)
-  file.rename(temp_pdf_path, final_pdf_path)
+  # Compile flattened file
+  latexmk(main_file, engine = "xelatex", bib_engine = "biber")
   
-  # Convert the relative path to an absolute path
-  final_pdf_absolute_path <- normalizePath(final_pdf_path, mustWork = FALSE)
+  # Copy resulting PDF to target location
+  compiled_pdf <- gsub("\\.tex$", ".pdf", normalizePath(main_file, mustWork = TRUE))
+  file.copy(compiled_pdf, final_pdf_path, overwrite = TRUE)
+  file.remove(compiled_pdf)
   
-  # Clean up log files
+  # Optional cleanup
   log_files <- list.files(pattern = "\\.log$")
   if (length(log_files) > 0) {
     file.remove(log_files)
   }
   
-  # Open the PDF if on Windows
+  # Open PDF
+  final_pdf_absolute_path <- normalizePath(final_pdf_path, mustWork = FALSE)
   if (.Platform$OS.type == "windows") {
     shell.exec(final_pdf_absolute_path)
   } else {
-    # For macOS and Linux
     system(paste("open", shQuote(final_pdf_absolute_path)))
   }
 }

@@ -10,8 +10,8 @@ criteria_compile <- function(
   tex <- "criteria/criteria.tex"
   lines <- readLines(tex)
   
-  # Find the index where the section "Essential" starts
-  start_index <- grep("^\\\\section\\{Essential\\}", lines)
+  # Find the index where the first section starts
+  start_index <- grep("^\\\\section\\{", lines)[1]
   
   # Process lines starting from the "Essential" section onwards
   processed_lines <- lines[start_index:length(lines)]
