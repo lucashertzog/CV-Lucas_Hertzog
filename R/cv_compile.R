@@ -22,7 +22,7 @@ cv_compile <- function(
       writeLines("\\newpage", file_conn)
     }
   }
-  
+  writeLines("\\zlabel{LastPage}", file_conn)
   writeLines("\\end{document}", file_conn)
   close(file_conn)
   
